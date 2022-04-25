@@ -422,6 +422,8 @@ List View
 Media Player
 ------------
 
+The mediaplayer plugin is only active if the selected document has a valid video filegroup (fileGrpVideo).
+
 :typoscript:`plugin.tx_dlf_mediaplayer.`
 
 .. t3-field-list-table::
