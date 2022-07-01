@@ -1259,6 +1259,7 @@ final class MetsDocument extends AbstractDocument
                         // Check if file has valid @USE attribute.
                         if (!empty($fileUse[(string) $fptr->attributes()->FILEID])) {
                             $this->physicalStructureInfo[$elements[$order]]['files'][$fileUse[(string) $fptr->attributes()->FILEID]] = (string) $fptr->attributes()->FILEID;
+                            // List all files of the fileGrp that are referenced on the page, not only the last one
                             $this->physicalStructureInfo[$elements[$order]]['all_files'][$fileUse[(string) $fptr->attributes()->FILEID]][] = (string) $fptr->attributes()->FILEID;
                         } elseif ($area = $fptr->children('http://www.loc.gov/METS/')->area) {
                             $areaAttrs = $area->attributes();
@@ -1267,6 +1268,7 @@ final class MetsDocument extends AbstractDocument
 
                             $physInfo['files'][$fileUse[$fileId]] = $fileId;
                             $physInfo['all_files'][$fileUse[$fileId]][] = $fileId;
+                            // Info about how the file is referenced/used on the page
                             $physInfo['fileInfos'][$fileId]['area'] = [
                                 'begin' => (string) $areaAttrs->BEGIN,
                                 'betype' => (string) $areaAttrs->BETYPE,
