@@ -310,14 +310,14 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Kitodo\Dlf\U
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Kitodo.Dlf',
+    'Dlf',
     'MediaPlayer',
     [
-        MediaPlayer::class => 'main',
+        \Kitodo\Dlf\Controller\MediaPlayerController::class => 'main',
     ],
     // non-cacheable actions
     [
-        MediaPlayer::class => '',
+        \Kitodo\Dlf\Controller\MediaPlayerController::class => '',
     ]
 );
 
