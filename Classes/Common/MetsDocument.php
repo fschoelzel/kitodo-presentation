@@ -355,7 +355,7 @@ final class MetsDocument extends AbstractDocument
             $details['thumbnailId'] = $this->getThumbnail();
             // Get page/track number of the first page/track related to this structure element.
             $details['pagination'] = $this->physicalStructureInfo[$this->smLinks['l2p'][$details['id']][0]]['orderlabel'];
-            $details['videoChapter'] = $this->getTimecode($details, GeneralUtility::trimExplode(',', $extConf['fileGrpVideo']));
+            $details['videoChapter'] = $this->getTimecode($details);
         } elseif ($details['id'] == $this->magicGetToplevelId()) {
             // Point to self if this is the toplevel structure.
             $details['points'] = 1;
@@ -402,11 +402,14 @@ final class MetsDocument extends AbstractDocument
      * - `timecode`: Time code specified in first matching `<mets:area>`
      *
      * @param array $logInfo
-     * @param array $fileGrps
      * @return ?array
      */
-    protected function getTimecode($logInfo, $fileGrps)
+    protected function getTimecode(array $logInfo)
     {
+        // Load plugin configuration.
+        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(self::$extKey);
+        $fileGrps = GeneralUtility::trimExplode(',', $extConf['fileGrpVideo']);
+
         foreach ($fileGrps as $fileGrp) {
             $physInfo = $this->physicalStructureInfo[$this->smLinks['l2p'][$logInfo['id']][0]];
             $fileIds = $physInfo['all_files'][$fileGrp] ?? [];
