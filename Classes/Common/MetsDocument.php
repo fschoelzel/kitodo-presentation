@@ -407,7 +407,7 @@ final class MetsDocument extends AbstractDocument
     protected function getTimecode(array $logInfo)
     {
         // Load plugin configuration.
-        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(self::$extKey);
+        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(self::$extKey, 'files');
         $fileGrps = GeneralUtility::trimExplode(',', $extConf['fileGrpVideo']);
 
         foreach ($fileGrps as $fileGrp) {
