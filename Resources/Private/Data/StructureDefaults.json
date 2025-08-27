@@ -99,6 +99,10 @@
         "toplevel": 1,
         "oai_name": ""
     },
+	"documentary": {
+		"toplevel": 1,
+		"oai_name": ""
+	},
     "dossier": {
         "toplevel": 1,
         "oai_name": ""
@@ -359,6 +363,10 @@
         "toplevel": 0,
         "oai_name": ""
     },
+	"video": {
+		"toplevel": 1,
+		"oai_name": ""
+	},
     "volume": {
         "toplevel": 1,
         "oai_name": ""

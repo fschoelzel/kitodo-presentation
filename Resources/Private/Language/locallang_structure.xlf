@@ -80,6 +80,9 @@
             <trans-unit id="structure.document">
                 <source><![CDATA[Document]]></source>
             </trans-unit>
+            <trans-unit id="structure.documentary">
+                <source><![CDATA[Documentary]]></source>
+            </trans-unit>
             <trans-unit id="structure.dossier">
                 <source><![CDATA[Dossier]]></source>
             </trans-unit>
@@ -277,6 +280,9 @@
             </trans-unit>
             <trans-unit id="structure.volume">
                 <source><![CDATA[Volume]]></source>
+            </trans-unit>
+            <trans-unit id="structure.video">
+                <source><![CDATA[Video]]></source>
             </trans-unit>
             <trans-unit id="structure.year">
                 <source><![CDATA[Year]]></source>

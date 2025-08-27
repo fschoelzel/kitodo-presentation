@@ -105,6 +105,10 @@
                 <source><![CDATA[Document]]></source>
                 <target><![CDATA[Dokument]]></target>
             </trans-unit>
+            <trans-unit id="structure.documentary" approved="yes">
+                <source><![CDATA[Documentary]]></source>
+                <target><![CDATA[Dokumentarfilm]]></target>
+            </trans-unit>
             <trans-unit id="structure.dossier" approved="yes">
                 <source><![CDATA[Dossier]]></source>
                 <target><![CDATA[Vorgang]]></target>
@@ -364,6 +368,10 @@
             <trans-unit id="structure.verse" approved="yes">
                 <source><![CDATA[Verse]]></source>
                 <target><![CDATA[Vers]]></target>
+            </trans-unit>
+            <trans-unit id="structure.video" approved="yes">
+                <source><![CDATA[Video]]></source>
+                <target><![CDATA[Video]]></target>
             </trans-unit>
             <trans-unit id="structure.volume" approved="yes">
                 <source><![CDATA[Volume]]></source>
