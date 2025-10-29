@@ -11,72 +11,30 @@
 
     <kitodo:mediaPlayerConfig id="MEDIA_CONFIG" settings="{settings}" />
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background-color: #f0f0f0;
-        }
-        .main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e0e0e0;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>    
-
     <div id="combined-container" class="combined-container">
         <div class="media-panel">
-            <f:debug>{video.url.poster.url}</f:debug>
+            <f:if condition="{settings.equalizer.enabled}">
+                <f:then>
+                    <dlf-equalizer id="{settings.elementId}-equalizer" forPlayer="{settings.elementId}"></dlf-equalizer>
 
-            <div class="header">
-                <button onclick="showCanvas('imageCanvas')">Zurück zum Bild</button>
-                <button onclick="showCanvas('canvas1')">equalizer</button>
-                <button onclick="showCanvas('canvas2')">marker-table</button>
-            </div>
-            <div class="main">
-                <div id="imageCanvas">
-                    <f:if condition="{video.url.poster}">
-                        <f:then>
-                            <img src="{video.url.poster.url}" alt="Mitte Bild" style="max-width: 100%; max-height: 100%;">
-                        </f:then>
-                    </f:if>
-                </div>
-                <div id="canvas1" class="hidden">
-                    <p>equalizer</p>
-                    <f:if condition="{settings.equalizer.enabled}">
-                        <f:then>
-                            <dlf-equalizer id="{settings.elementId}-equalizer" forPlayer="{settings.elementId}"></dlf-equalizer>
-                        </f:then>
-                    </f:if>
-                </div>
-                <div id="canvas2" class="hidden">
-                    <p>marker-table</p>
-                    <dlf-marker-table forPlayer="{settings.elementId}"></dlf-marker-table>
-                </div>
-            </div>
+                    <f:comment>
+                        <!-- Workaround: Define variables for javascript curly braces to prevent parsing by the Fluid parser -->
+                        <!-- Source: https://docs.typo3.org/other/typo3fluid/fluid/4.5/en-us/Syntax/Escaping.html#using-variables-for-curly-braces -->
+                    </f:comment>
+                    <f:asset.script type="text/javascript" identifier="parse-equalizer-presets">
+                        <f:alias map="{ocb: '{', ccb: '}'}">
+                            window.addEventListener('DOMContentLoaded', function () {ocb}
+                                var equalizer = document.getElementById("{settings.elementId}-equalizer");
+                                equalizer.parsePresets(MEDIA_CONFIG['equalizer']['presets']);
 
-            <script>
-                function showCanvas(canvasId) {
-                    document.getElementById('imageCanvas').classList.add('hidden');
-                    document.getElementById('canvas1').classList.add('hidden');
-                    document.getElementById('canvas2').classList.add('hidden');
-                    document.getElementById(canvasId).classList.remove('hidden');
-                }
-            </script>
+                                if (MEDIA_CONFIG['equalizer']['default'])
+                                    equalizer.selectPreset(MEDIA_CONFIG['equalizer']['default']);
+                            {ccb});
+                        </f:alias>
+                    </f:asset.script>
+                </f:then>
+            </f:if>
+            <dlf-marker-table forPlayer="{settings.elementId}"></dlf-marker-table>
         </div>
 
         <div id="tx-dlf-view" class="tx-dlf-view">

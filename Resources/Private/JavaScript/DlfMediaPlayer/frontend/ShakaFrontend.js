@@ -458,6 +458,7 @@ export default class ShakaFrontend {
     );
 
     if (showPoster) {
+      console.log('Setting poster', this.mediaProperties.poster);
       // @ts-expect-error
       this.$poster.src = this.mediaProperties.poster;
     }
