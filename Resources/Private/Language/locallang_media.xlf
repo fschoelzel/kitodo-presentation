@@ -194,6 +194,9 @@
             <trans-unit id="control.sound_tools.marker_table.entry.endTime">
                 <source><![CDATA[end]]></source>
             </trans-unit>
+            <trans-unit id="control.sound_tools.marker_table.entry.repeat">
+                <source><![CDATA[repeat]]></source>
+            </trans-unit>            
             <trans-unit id="control.sound_tools.marker_table.entry.delete">
                 <source><![CDATA[Delete]]></source>
             </trans-unit>

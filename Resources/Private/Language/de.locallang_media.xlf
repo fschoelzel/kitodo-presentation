@@ -257,6 +257,10 @@
                 <source><![CDATA[end]]></source>
                 <target><![CDATA[bis]]></target>
             </trans-unit>
+            <trans-unit id="control.sound_tools.marker_table.entry.repeat" approved="yes">
+                <source><![CDATA[repeat]]></source>
+                <target><![CDATA[wiederholen]]></target>
+            </trans-unit>
             <trans-unit id="control.sound_tools.marker_table.entry.delete" approved="yes">
                 <source><![CDATA[Delete]]></source>
                 <target><![CDATA[Löschen]]></target>
