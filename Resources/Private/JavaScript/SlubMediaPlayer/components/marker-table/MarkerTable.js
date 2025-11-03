@@ -338,6 +338,18 @@ export default class MarkerTable extends DlfMediaPlugin {
     let $tr, $id, $startTime, $endTime;
 
     /** @type {WithRow<HTMLButtonElement>} */
+    const $repeatBtn = e('button', {
+      title: this.env.t('control.sound_tools.marker_table.entry.repeat'),
+      // $click: this.handlers.onBookmarkRow,
+      // $click: this.handlers.onRepeatRow,
+    }, [
+      e('span', {
+        className: 'is-active material-icons-round inline-icon',
+      }, ['repeat']),
+    ]);
+    $repeatBtn.rowId = segment.id;
+
+    /** @type {WithRow<HTMLButtonElement>} */
     const $deleteBtn = e('button', {
       title: this.env.t('control.sound_tools.marker_table.entry.delete'),
       $click: this.handlers.onDeleteRow,
@@ -385,6 +397,7 @@ export default class MarkerTable extends DlfMediaPlugin {
         $click: this.handlers.onSeekToEndTime,
       }),
       e('td', { className: "marker-buttons-col" }, [
+        $repeatBtn,
         $bookmarkBtn,
         $deleteBtn,
       ]),
