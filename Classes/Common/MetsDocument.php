@@ -20,8 +20,10 @@ use DOMXPath;
 use Kitodo\Dlf\Domain\Repository\FormatRepository;
 use Kitodo\Dlf\Domain\Repository\MetadataRepository;
 use Kitodo\Dlf\Domain\Repository\StructureRepository;
+use Kitodo\Dlf\Event\LibRmlDetectedEvent;
 use Kitodo\Dlf\Hooks\KitodoProductionHacks;
 use Kitodo\Dlf\Service\MediaPlayerService;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use SimpleXMLElement;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Log\LogManager;
@@ -242,6 +244,11 @@ final class MetsDocument extends AbstractDocument
      * @var StructureRepository
      */
     protected StructureRepository $structureRepository;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * This adds metadata from METS structural map to metadata array.
@@ -1237,6 +1244,7 @@ final class MetsDocument extends AbstractDocument
         $this->metadataRepository->useStoragePid($this->configPid);
         $this->structureRepository->useStoragePid($this->configPid);
         $this->settings = $settings;
+        $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
         // Get METS node from XML file.
         $this->registerNamespaces($this->xml);
         $mets = $this->xml->xpath('//mets:mets');
@@ -1318,6 +1326,17 @@ final class MetsDocument extends AbstractDocument
         }
 
         $this->registerNamespaces($xml[0]);
+
+        // TODO: Prüfen ob extension überhaupt existiert / nicht warten wenn kein libRML oder sub-ext nicht vorhanden ist
+        // TODO: Loggen wenn LibRML vorhanden aber keine Extension aktiv/vorhanden
+        if (!empty($otherMdType) && (string) $otherMdType[0] === 'LibRML') {
+            $this->eventDispatcher->dispatch(
+                new LibRmlDetectedEvent(
+                    $mdId,
+                    $xml[0],
+                ),
+            );
+        }
 
         return [
             'id' => $mdId,
