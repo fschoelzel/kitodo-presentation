@@ -39,8 +39,6 @@ class LibRML implements MetadataInterface
     {
         // register LibRML namespace depending on document
         $this->registerLibrmlNamespace($xml);
-        
-        // debug($xml->asXML());
 
         // download
         $actionDownload = $xml->xpath('./librml:item/librml:action[@type="download"]');
@@ -60,6 +58,7 @@ class LibRML implements MetadataInterface
             $metadata['librml_permission_displaymetadata'] = [(string) $actionDisplaymetadata[0]['permission']];
         }
 
+        // dump the $metadata array
         // debug($metadata);
     }
 

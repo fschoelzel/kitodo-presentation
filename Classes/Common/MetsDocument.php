@@ -1327,6 +1327,7 @@ final class MetsDocument extends AbstractDocument
 
         $this->registerNamespaces($xml[0]);
 
+        // ** START - RBO Einstiegspunkt
         // TODO: Prüfen ob extension überhaupt existiert / nicht warten wenn kein libRML oder sub-ext nicht vorhanden ist
         // TODO: Loggen wenn LibRML vorhanden aber keine Extension aktiv/vorhanden
         if (!empty($otherMdType) && (string) $otherMdType[0] === 'LibRML') {
@@ -1337,6 +1338,7 @@ final class MetsDocument extends AbstractDocument
                 ),
             );
         }
+        // ** END - RBO Einstiegspunkt
 
         return [
             'id' => $mdId,
