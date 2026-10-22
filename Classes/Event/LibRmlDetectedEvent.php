@@ -9,14 +9,14 @@ use SimpleXMLElement;
 final class LibRmlDetectedEvent
 {
     public function __construct(
-        private readonly string $metadataId,
+        private readonly string $mdId,
         private readonly SimpleXMLElement $libRmlXml,
     ) {
     }
 
-    public function getMetadataId(): string
+    public function getMdId(): string
     {
-        return $this->metadataId;
+        return $this->mdId;
     }
 
     public function getLibRmlXml(): SimpleXMLElement
